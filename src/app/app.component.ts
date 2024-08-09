@@ -1,13 +1,24 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'check-password';
+export class AppComponent implements OnInit {
+  signupForm: FormGroup;
+  passwordIsValid = false;
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit() {
+    this.signupForm = this.fb.group({
+      password: ['', Validators.required],
+    });
+  }
+
+  passwordValid(event) {
+   this.passwordIsValid = event;
+  }
 }
